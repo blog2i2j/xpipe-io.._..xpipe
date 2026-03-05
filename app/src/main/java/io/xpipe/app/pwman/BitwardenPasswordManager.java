@@ -92,7 +92,7 @@ public class BitwardenPasswordManager implements PasswordManager {
         var def = getDefaultConfigPath();
         if (Files.exists(def)) {
             try {
-                var defIsNewer = Files.getLastModifiedTime(def).compareTo(Files.getLastModifiedTime(cacheDataFile)) > 0;
+                var defIsNewer = !Files.exists(cacheDataFile) || Files.getLastModifiedTime(def).compareTo(Files.getLastModifiedTime(cacheDataFile)) > 0;
                 if (defIsNewer) {
                     Files.copy(def, cacheDataFile, StandardCopyOption.REPLACE_EXISTING);
                 }
