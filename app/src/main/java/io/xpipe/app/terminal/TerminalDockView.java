@@ -256,6 +256,10 @@ public class TerminalDockView {
     }
 
     public void attach() {
+        if (viewBounds == null) {
+            return;
+        }
+
         TrackEvent.withTrace("Terminal view attached").handle();
 
         terminalInstances.forEach(terminalInstance -> {
